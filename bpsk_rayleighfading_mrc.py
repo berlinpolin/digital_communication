@@ -30,7 +30,9 @@ def main():
     lambda_snr = np.sqrt(snr/(snr + 1))
     the_ber_n1 = 0.5 * (1 - lambda_snr)
     # the_ber_n2 = 3/(4*(snr**2))
-    the_ber_n2 = (((1-lambda_snr)/2)**2) * ((2+1)*(((1+lambda_snr)/2)**2))
+    the_ber_n2 = (((1-lambda_snr)/2)**2) * (1+2*(((1+lambda_snr)/2)))
+    # p = 1/2 - 1/2*((1+1/snr)**(-1/2))
+    # the_ber_n2 = (p**2)*(1+2*(1-p))
     
 
     print(sim_ber[0,:])
@@ -38,10 +40,10 @@ def main():
     print(sim_ber[1,:])
     print(the_ber_n2)
     plt.figure
-    plt.semilogy(snr, sim_ber[0,:], label='n_rx = 1 (simulation)')
-    plt.semilogy(snr, sim_ber[1,:], label='n_rx = 2 (simulation)')
-    plt.semilogy(snr, the_ber_n1, label='n_rx = 1 (theoretical)')
-    plt.semilogy(snr, the_ber_n2, label='n_rx = 2 (theoretical)')
+    plt.semilogy(snr, sim_ber[0,:], 'b', label='n_rx = 1 (simulation)')
+    plt.semilogy(snr, sim_ber[1,:], 'g', label='n_rx = 2 (simulation)')
+    plt.semilogy(snr, the_ber_n1, 'r--', label='n_rx = 1 (theoretical)')
+    plt.semilogy(snr, the_ber_n2, 'y--', label='n_rx = 2 (theoretical)')
     plt.grid('True')
     plt.legend()
     plt.show()
